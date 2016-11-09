@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>^_^</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://vLiang486.github.io/"/>
+  <updated>2016-11-09T08:40:03.211Z</updated>
+  <id>http://vLiang486.github.io/</id>
+  
+  <author>
+    <name>vLiang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mysql主从备份</title>
+    <link href="http://vLiang486.github.io/2016/11/09/Mysql/"/>
+    <id>http://vLiang486.github.io/2016/11/09/Mysql/</id>
+    <published>2016-11-09T08:03:13.000Z</published>
+    <updated>2016-11-09T08:40:03.211Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2 id="Mysql主从备份"><a href="#Mysql主从备份" class="headerlink" title="Mysql主从备份"></a>Mysql主从备份</h2><ol>
+<li>主从服务器分别作以下操作：<ul>
+<li>版本一致</li>
+<li>初始化表，并在后台启动mysql</li>
+<li>修改root的密码</li>
+</ul>
+</li>
+<li><p>修改主服务器master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #[必须]启用二进制日志</div><div class="line">server-id=222 #[必须]服务器唯一ID，默认是1，一般取IP最后一段</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改从服务器slave:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #[不是必须]启用二进制日志</div><div class="line">server-id=226 #[必须]服务器唯一ID，默认是1，一般取IP最后一段</div></pre></td></tr></table></figure>
+</li>
+<li><p>重启mysql服务</p>
+</li>
+<li><p>在主服务器上建立帐户并授权slave:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt;GRANT REPLICATION SLAVE ON *.* to &apos;mysync&apos;@&apos;%&apos; identified by &apos;123456&apos;;</div><div class="line">注：*.*表示所有客户端都可能连, 账号：`mysync` 密码：`123456`。</div></pre></td></tr></table></figure>
+</li>
+<li><p>登录主服务器的mysql，查询master的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt;show master status;</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">| mysql-bin.000004 |      308 |              |                  |</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line">注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置从服务器Slave：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mysql&gt;</div><div class="line">change master to master_host=&apos;192.168.145.222&apos;,</div><div class="line">master_user=&apos;mysync&apos;,master_password=&apos;q123456&apos;,</div><div class="line">master_log_file=&apos;mysql-bin.000004&apos;,master_log_pos=308;</div><div class="line">注：不要换行，308数字前后无单引号。</div><div class="line">mysql&gt;start slave;    #启动从服务器复制功能</div></pre></td></tr></table></figure>
+</li>
+<li><p>检查从服务器复制功能状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show slave status\G;</div><div class="line">Slave_IO_Running: Yes    #此状态必须YES</div><div class="line">Slave_SQL_Running: Yes     #此状态必须YES</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="异常排查"><a href="#异常排查" class="headerlink" title="异常排查"></a>异常排查</h2><ol>
+<li><p><code>server_id</code> 重复</p>
+<ul>
+<li><p>查询 <code>server_id</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show variables like &apos;server_id&apos;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置 <code>server_id</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt; set global server_id=2; #此处的数值和my.cnf里设置的一样就行 每台机器不可以重复</div><div class="line">mysql&gt; slave start;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;script src=&quot;/assets/js/DPlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;Mysql主从备份&quot;&gt;&lt;a href=&quot;#Mysql主从备份&quot; 
+    
+    </summary>
+    
+      <category term="Mysql" scheme="http://vLiang486.github.io/categories/Mysql/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo</title>
+    <link href="http://vLiang486.github.io/2016/11/02/Hexo/"/>
+    <id>http://vLiang486.github.io/2016/11/02/Hexo/</id>
+    <published>2016-11-02T08:03:13.000Z</published>
+    <updated>2016-11-09T08:35:34.079Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><script>dplayerbilibili(6987506);</script>
+
+<p><code>Hexo</code> 简单设置<br><a id="more"></a></p>
+<h2 id="NexT-主题设置"><a href="#NexT-主题设置" class="headerlink" title="NexT 主题设置"></a>NexT 主题设置</h2><h3 id="关于添加居中模块"><a href="#关于添加居中模块" class="headerlink" title="关于添加居中模块"></a>关于添加居中模块</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">blockquote</span> <span class="attr">class</span>=<span class="string">"blockquote-center"</span>&gt;</span>优秀的人，不是不合群，而是他们合群的人里面没有你<span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="文章摘要"><a href="#文章摘要" class="headerlink" title="文章摘要"></a>文章摘要</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">在需要显示摘要的地方添加如下代码即可：</div><div class="line">以上是摘要</div><div class="line"><span class="comment">&lt;!--more--&gt;</span></div><div class="line">以下是余下全文</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;script&gt;dplayerbilibili(6987506);&lt;/script&gt;
+
+&lt;p&gt;&lt;code&gt;Hexo&lt;/code&gt; 简单设置&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://vLiang486.github.io/categories/Hexo/"/>
+    
+    
+  </entry>
+  
+</feed>
