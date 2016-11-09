@@ -11,7 +11,7 @@ function dplayerbilibili(av){
                 theme: '#FADFA3',                                                  // Optional, theme color, default: #b7daff
                 loop: true,                                                        // Optional, loop play music, default: true
                 lang: 'zh',                                                        // Optional, language, `zh` for Chinese, `en` for English, default: Navigator language
-                screenshot: false,                                                  // Optional, enable screenshot function, default: false, NOTICE: if set it to true, video and video poster must enable Cross-Origin
+                screenshot: true,                                                  // Optional, enable screenshot function, default: false, NOTICE: if set it to true, video and video poster must enable Cross-Origin
                 hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
                 preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
                 video: {                                                           // Required, video info
