@@ -15,7 +15,7 @@ function dplayerbilibili(av){
                 hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
                 preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
                 video: {                                                           // Required, video info
-                    url: response.video.durl.url,                                         // Required, video url
+                    url: response.durl.url,                                         // Required, video url
                     // pic: 'http://i1.hdslb.com/bfs/archive/1c90451ef09d208042de82ea76d280c30768a6f4.jpg'
                 },
                 danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
