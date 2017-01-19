@@ -5,7 +5,6 @@ function dplayerbilibili(av){
       if (xhr.readyState === 4) {
           if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
               var response = JSON.parse(xhr.responseText);
-              console.log(response);
               var dp1 = new DPlayer({
                 element: document.getElementById('dplayer'+ av),                       // Optional, player element
                 autoplay: false,                                                   // Optional, autoplay video, not supported by mobile browsers
@@ -16,7 +15,7 @@ function dplayerbilibili(av){
                 hotkey: true,                                                      // Optional, binding hot key, including left right and Space, default: true
                 preload: 'auto',                                                   // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
                 video: {                                                           // Required, video info
-                    url: response.durl.url,                                         // Required, video url
+                    url: response.video.durl.backup[0].url,                                         // Required, video url
                     // pic: 'http://i1.hdslb.com/bfs/archive/1c90451ef09d208042de82ea76d280c30768a6f4.jpg'
                 },
                 danmaku: {                                                         // Optional, showing danmaku, ignore this option to hide danmaku
