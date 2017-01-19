@@ -5,6 +5,7 @@ function dplayerbilibili(av){
       if (xhr.readyState === 4) {
           if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
               var response = JSON.parse(xhr.responseText);
+              console.console.log(response);
               var dp1 = new DPlayer({
                 element: document.getElementById('dplayer'+ av),                       // Optional, player element
                 autoplay: false,                                                   // Optional, autoplay video, not supported by mobile browsers
