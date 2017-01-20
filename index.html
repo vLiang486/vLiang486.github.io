@@ -263,6 +263,121 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/20/君の名は/" itemprop="url">
+                  君の名は
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-20T16:19:57+08:00" content="2017-01-20">
+              2017-01-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Japan/" itemprop="url" rel="index">
+                    <span itemprop="name">Japan</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="私は優衣が大好き-ღ˘⌣˘ღ"><a href="#私は優衣が大好き-ღ˘⌣˘ღ" class="headerlink" title="私は優衣が大好き (ღ˘⌣˘ღ)"></a>私は優衣が大好き (ღ˘⌣˘ღ)</h4>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/20/君の名は/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/09/Mysql/" itemprop="url">
                   Mysql主从备份
                 </a>
@@ -325,49 +440,12 @@
 
       
         
-          
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2 id="Mysql主从备份"><a href="#Mysql主从备份" class="headerlink" title="Mysql主从备份"></a>Mysql主从备份</h2><ol>
-<li>主从服务器分别作以下操作：<ul>
-<li>版本一致</li>
-<li>初始化表，并在后台启动mysql</li>
-<li>修改root的密码</li>
-</ul>
-</li>
-<li><p>修改主服务器master</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #[必须]启用二进制日志</div><div class="line">server-id=222 #[必须]服务器唯一ID，默认是1，一般取IP最后一段</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改从服务器slave:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #[不是必须]启用二进制日志</div><div class="line">server-id=226 #[必须]服务器唯一ID，默认是1，一般取IP最后一段</div></pre></td></tr></table></figure>
-</li>
-<li><p>重启mysql服务</p>
-</li>
-<li><p>在主服务器上建立帐户并授权slave:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt;GRANT REPLICATION SLAVE ON *.* to &apos;mysync&apos;@&apos;%&apos; identified by &apos;123456&apos;;</div><div class="line">注：*.*表示所有客户端都可能连, 账号：`mysync` 密码：`123456`。</div></pre></td></tr></table></figure>
-</li>
-<li><p>登录主服务器的mysql，查询master的状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt;show master status;</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">| mysql-bin.000004 |      308 |              |                  |</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line">注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置从服务器Slave：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mysql&gt;</div><div class="line">change master to master_host=&apos;192.168.145.222&apos;,</div><div class="line">master_user=&apos;mysync&apos;,master_password=&apos;q123456&apos;,</div><div class="line">master_log_file=&apos;mysql-bin.000004&apos;,master_log_pos=308;</div><div class="line">注：不要换行，308数字前后无单引号。</div><div class="line">mysql&gt;start slave;    #启动从服务器复制功能</div></pre></td></tr></table></figure>
-</li>
-<li><p>检查从服务器复制功能状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show slave status\G;</div><div class="line">Slave_IO_Running: Yes    #此状态必须YES</div><div class="line">Slave_SQL_Running: Yes     #此状态必须YES</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="异常排查"><a href="#异常排查" class="headerlink" title="异常排查"></a>异常排查</h2><ol>
-<li><p><code>server_id</code> 重复</p>
-<ul>
-<li><p>查询 <code>server_id</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show variables like &apos;server_id&apos;;</div></pre></td></tr></table></figure>
-</li>
-<li><p>设置 <code>server_id</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt; set global server_id=2; #此处的数值和my.cnf里设置的一样就行 每台机器不可以重复</div><div class="line">mysql&gt; slave start;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-
-          
+          <h2 id="Mysql主从备份"><a href="#Mysql主从备份" class="headerlink" title="Mysql主从备份"></a>Mysql主从备份</h2>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/09/Mysql/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -552,7 +630,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -560,12 +638,19 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
