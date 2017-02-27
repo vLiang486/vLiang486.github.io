@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vLiang486.github.io/"/>
-  <updated>2017-02-27T04:11:41.961Z</updated>
+  <updated>2017-02-27T06:48:27.215Z</updated>
   <id>http://vLiang486.github.io/</id>
   
   <author>
@@ -20,22 +20,21 @@
     <link href="http://vLiang486.github.io/2017/02/26/%E6%97%A5%E8%AF%AD%E6%96%87%E6%B3%95/"/>
     <id>http://vLiang486.github.io/2017/02/26/日语文法/</id>
     <published>2017-02-26T07:39:54.000Z</published>
-    <updated>2017-02-27T04:11:41.961Z</updated>
+    <updated>2017-02-27T06:48:27.215Z</updated>
     
     <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h4 id="《新标日》文法"><a href="#《新标日》文法" class="headerlink" title="《新标日》文法"></a>《新标日》文法</h4><a id="more"></a>
 <h2 id="第一课"><a href="#第一课" class="headerlink" title="第一课"></a>第一课</h2><ol>
-<li>名は　名<font color="#6495ED">です</font>。</li>
-<li>名は　名<font color="#6495ED">では（じゃ）　ありません(ない)</font>。</li>
-<li>名は　名<font color="#6495ED">ですか</font>。</li>
-<li>名の　名。 [ 从属机构、国家 ] [ 属性 ]</li>
+<li>名は　名<font color="#6495ED">です</font>。 <font color="#F08080">～是～</font></li>
+<li>名は　名<font color="#6495ED">では</font>（じゃ）　<font color="#6495ED">ありません</font>(ない)。 <font color="#F08080">～不是～</font></li>
+<li>名は　名<font color="#6495ED">ですか</font>。 <font color="#F08080">～是～吗?</font></li>
+<li>名の　名。 [ 从属机构、国家 ] [ 属性 ] <font color="#F08080">～的～</font></li>
 </ol>
 <h2 id="第二课"><a href="#第二课" class="headerlink" title="第二课"></a>第二课</h2><ol>
-<li>これ/それ/あれ<font color="#6495ED">は</font> 名<font color="#6495ED">です</font>。 (事物代词)</li>
-<li>この/その/あの+名<font color="#6495ED">は</font>名<font color="#6495ED">です</font>。 (连体词)</li>
-<li>～は～<font color="#6495ED">の</font>～です。　(内容或其他)</li>
-<li>山下さん　の　かばん　は　<font color="#6495ED">どれ</font>　ですか。</li>
-<li>山下さん　の　かばん　<font color="#6495ED">は</font>　<font color="#6495ED">どの</font>　かばん　ですか。</li>
-<li>名の名です。(所属、内容、产地)</li>
+<li>これ/それ/あれ<font color="#6495ED">は</font> 名<font color="#6495ED">です</font>。 (事物代词) <font color="#F08080">这个/那个/远的那个是书</font></li>
+<li>この/その/あの+名<font color="#6495ED">は</font>名<font color="#6495ED">です</font>。 (连体词) <font color="#F08080">这个/那个/远的那个是山下的书</font></li>
+<li>山下さん　の　かばん　は　<font color="#6495ED">どれ</font>　ですか。<font color="#F08080">山下先生的包是哪个</font></li>
+<li>山下さん　の　かばん　は　<font color="#6495ED">どの</font>　かばん　ですか。 <font color="#F08080">山下先生的包是哪个包</font></li>
+<li>名 の 名 です。(所属、内容、产地) <font color="#F08080">～的～</font></li>
 </ol>
 ]]></content>
     
